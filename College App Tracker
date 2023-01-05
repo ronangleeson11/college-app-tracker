@@ -1,0 +1,136 @@
+package collegeapptracker;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class CollegeAppTracker implements ActionListener {
+	
+	private static String function;
+	private static String stringCollegeList;
+	private static JPanel panel;
+	private static JFrame frame;
+	private static JButton buttonAddCollege;
+	private static JButton buttonRemoveCollege;
+	private static JButton buttonAddCollegeInfo;
+	private static JButton buttonViewCollegeInfo;
+	private static JLabel labelCollegeList;
+	private static JLabel label;
+	private static JLabel commandText;
+	private static JTextField userText;
+	private static List<String> collegeList;
+	
+	public CollegeAppTracker() {
+		
+		function = new String();
+		stringCollegeList = "";
+		panel = new JPanel();
+		frame = new JFrame();
+		buttonAddCollege = new JButton("Add colleges to my list");
+		buttonRemoveCollege = new JButton("Remove colleges from my list");
+		buttonAddCollegeInfo = new JButton("Change college information");
+		buttonViewCollegeInfo = new JButton("View college information");
+		labelCollegeList = new JLabel();
+		label = new JLabel("What would you like to do?");
+		commandText = new JLabel();
+		userText = new JTextField();
+		collegeList = new ArrayList<>(); // Create a list
+		
+		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+		panel.setLayout(new GridLayout(0, 1));
+		panel.add(labelCollegeList);
+		panel.add(label);
+		panel.add(buttonAddCollege);
+		panel.add(buttonRemoveCollege);
+		panel.add(buttonAddCollegeInfo);
+		panel.add(buttonViewCollegeInfo);
+		panel.add(commandText);
+		
+		frame.add(panel, BorderLayout.CENTER);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setTitle("College Application Tracker");
+		frame.pack();
+		frame.setVisible(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		buttonAddCollege.setBackground(Color.green);
+		buttonAddCollege.addActionListener(this);
+		
+		buttonRemoveCollege.setBackground(Color.red);
+		buttonRemoveCollege.addActionListener(this);
+		
+		buttonAddCollegeInfo.setBackground(Color.yellow);
+		buttonAddCollegeInfo.addActionListener(this);
+		
+		buttonViewCollegeInfo.setBackground(Color.blue);
+		buttonViewCollegeInfo.addActionListener(this);
+		
+		userText.addActionListener(this);
+		userText.setBounds(100, 25, 165, 25);
+		panel.add(userText);
+		
+	}
+	
+	public static void main(String[] args) {
+				
+		new CollegeAppTracker();
+					
+		} 
+			
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == buttonAddCollege) {
+			commandText.setText("Which college would you like to add?");
+			function = "add";
+		}
+		
+		if(e.getSource() == buttonRemoveCollege) {
+			commandText.setText("Which college would you like to remove?");
+			function = "remove";
+		}
+		
+		if(e.getSource() == buttonAddCollegeInfo) {
+			commandText.setText("Which college's information would you like to change?");
+			function = "change";
+		}
+		
+		if(e.getSource() == buttonViewCollegeInfo) {
+			commandText.setText("Which college's information would you like to view?");
+			function = "view";
+		}
+		
+		if(e.getSource() == userText && function == "add") {
+			collegeList.add(userText.getText());
+			stringCollegeList = userText.getText() + ", " + stringCollegeList;
+			labelCollegeList.setText(stringCollegeList);
+		}
+		
+		if(e.getSource() == userText && function == "remove") {
+			collegeList.remove(userText.getText());
+			stringCollegeList = stringCollegeList.replace((userText.getText() + ", "), "");
+			labelCollegeList.setText(stringCollegeList);
+		}
+		
+		if(e.getSource() == userText && function == "change") {
+			
+		}
+		
+		if(e.getSource() == userText && function == "view") {
+			
+		}
+		
+	}
+	
+}
