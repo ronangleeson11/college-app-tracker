@@ -44,7 +44,7 @@ public class CollegeAppTracker implements ActionListener {
 		label = new JLabel("What would you like to do?");
 		commandText = new JLabel();
 		userText = new JTextField();
-		collegeList = new ArrayList<>(); // Create a list
+		collegeList = new ArrayList<>();
 		
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 		panel.setLayout(new GridLayout(0, 1));
@@ -125,6 +125,10 @@ public class CollegeAppTracker implements ActionListener {
 		
 		if(e.getSource() == userText && function == "change") {
 			
+			if(collegeList.contains(userText.getText())) {
+				System.out.println("valid");
+				labelCollegeList.setText(userText.getText() + " information:");
+			}
 		}
 		
 		if(e.getSource() == userText && function == "view") {
